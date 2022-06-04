@@ -88,23 +88,50 @@ const data0 = {
 const data1 = {
   data: [
     {
-      terms: 'Term 1',
-      query_count: 50000,
+      terms: 'bad',
+      query_count: 200,
+      click_count: 190,
+    },
+    {
+      terms: 'really bad',
+      query_count: 50,
+      click_count: 45,
+    },
+    {
+      terms: 'good',
+      query_count: 50,
       click_count: 10,
     },
     {
-      terms: 'Term 2',
-      query_count: 100,
-      click_count: 50,
+      terms: 'best',
+      query_count: 250,
+      click_count: 10,
     },
   ],
   total_query_count: 120351,
   total_click_count: 30147,
 };
 
-const data = [data0, data1];
+const data2 = {
+  data: [
+    {
+      terms: 'Term 1',
+      query_count: 1,
+      click_count: 1,
+    },
+    {
+      terms: 'Term 2',
+      query_count: 500,
+      click_count: 250,
+    },
+  ],
+  total_query_count: 120351,
+  total_click_count: 30147,
+};
 
-const getOpportunities = (setOfValues = 0) => {
+const data = [data0, data1, data2];
+
+const getOpportunities = (setOfValues = 1) => {
   return data[setOfValues]
     ? data[setOfValues]
     : {

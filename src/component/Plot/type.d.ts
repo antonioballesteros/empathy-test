@@ -8,4 +8,5 @@ export interface PlotValue {
   x: number;
   y: number;
   label?: string;
+  color?: string;
 }

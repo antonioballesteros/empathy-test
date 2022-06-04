@@ -25,7 +25,7 @@ const Opportunities = () => {
 
   return (
     <div>
-      <div>Show Opportunities</div>
+      <h2>Show Opportunities</h2>
       <Plot data={opportunities} average={average} />
     </div>
   );
