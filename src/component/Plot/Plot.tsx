@@ -1,10 +1,11 @@
-import type { PlotValue } from './type';
+import type { PlotValue, Point } from './type';
 
 interface PlotType {
   data: PlotValue[];
+  average?: [Point, Point];
 }
-const Plot = ({ data }: PlotType) => {
-  console.log('Plot: data', data);
+const Plot = ({ data, average }: PlotType) => {
+  console.log('Plot', { data, average });
   return (
     <div>
       {data.map((item, i) => {

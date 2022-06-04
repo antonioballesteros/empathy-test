@@ -105,7 +105,13 @@ const data1 = {
 const data = [data0, data1];
 
 const getOpportunities = (setOfValues = 0) => {
-  return data[setOfValues] ? data[setOfValues].data : [];
+  return data[setOfValues]
+    ? data[setOfValues]
+    : {
+        data: [],
+        total_query_count: 0,
+        total_click_count: 0,
+      };
 };
 
 export default getOpportunities;
