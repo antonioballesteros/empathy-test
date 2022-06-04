@@ -1,9 +1,10 @@
-import './App.css'
+import classes from './App.module.css'
 
+import {Opportunities} from './page'
 function App() {
   return (
-    <div className="App">
-      <span>first step</span>
+    <div className={classes.App}>
+      <Opportunities />
     </div>
   )
 }
