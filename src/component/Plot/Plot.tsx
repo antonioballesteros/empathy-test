@@ -5,7 +5,19 @@ interface PlotType {
 }
 const Plot = ({ data }: PlotType) => {
   console.log('Plot: data', data);
-  return <span>Show Plot</span>;
+  return (
+    <div>
+      {data.map((item, i) => {
+        return (
+          <div key={item.id || i}>
+            <span>
+              {item.label} - {item.x} - {item.y}
+            </span>
+          </div>
+        );
+      })}
+    </div>
+  );
 };
 
 export default Plot;

@@ -4,12 +4,11 @@ import { getOpportunities } from './data';
 
 const Opportunities = () => {
   const data = getOpportunities();
-  const opportunities: PlotValue[] = data.map(({ id, x, y, title }) => {
+  const opportunities: PlotValue[] = data.map(({ query_count, click_count, terms }) => {
     return {
-      id,
-      x,
-      y,
-      label: title,
+      x: query_count,
+      y: click_count,
+      label: terms,
     };
   });
   return (

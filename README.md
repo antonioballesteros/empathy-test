@@ -34,3 +34,6 @@ Antonio 04.06.2022
  * Responsive ?
  * Complete readme with steps to install / test it
   
+
+## Discarted ideas
+* fake data with loading state, and some delay to simulate real network  
