@@ -1,3 +1,3 @@
-import Plot from "./Plot";
+import Plot from './Plot';
 
-export {Plot}
+export { Plot };

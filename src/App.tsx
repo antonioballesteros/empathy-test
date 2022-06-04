@@ -1,12 +1,12 @@
-import classes from './App.module.css'
+import classes from './App.module.css';
 
-import {Opportunities} from './page'
+import { Opportunities } from '@/page';
 function App() {
   return (
     <div className={classes.App}>
       <Opportunities />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

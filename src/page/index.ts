@@ -1,3 +1,3 @@
-import Opportunities from './Opportinities'
+import Opportunities from './Opportinities';
 
-export {Opportunities}
+export { Opportunities };

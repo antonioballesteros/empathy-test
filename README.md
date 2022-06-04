@@ -5,6 +5,7 @@ Antonio 04.06.2022
  * Create and install app 
 
     * Vite
+    * Configure eslint 
  * Build components structure
     
     * Avoid router to simplify app

@@ -1,8 +1,12 @@
 const getOpportunities = () => {
-    return [{
-        id: "id",
-        value: "value"
-    }]
-}
+  return [
+    {
+      id: 1,
+      x: 99,
+      y: 33,
+      title: 'value',
+    },
+  ];
+};
 
-export default getOpportunities
+export default getOpportunities;
