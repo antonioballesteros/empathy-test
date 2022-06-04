@@ -37,3 +37,4 @@ Antonio 04.06.2022
 
 ## Discarted ideas
 * fake data with loading state, and some delay to simulate real network  
+* Plot component should allow more parameters to configure it, like colors, background, show labels or not, etc

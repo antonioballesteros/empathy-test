@@ -26,9 +26,9 @@ const defaultDimensions = {
   margin: { top: 30, right: 30, bottom: 30, left: 30 },
 };
 
-const getAverageYfromX = (x: number, average?: [Point, Point]): number => {
+export const getAverageYfromX = (x: number, average?: [Point, Point]): number | null => {
   if (!average) {
-    return 0;
+    return null;
   }
   const [p1, p2] = average;
 
@@ -36,20 +36,24 @@ const getAverageYfromX = (x: number, average?: [Point, Point]): number => {
   const difY = p2.y - p1.y;
 
   if (!difX) {
-    return 0;
+    return null;
   }
 
   const delta = difY / difX;
 
-  const y = delta * (x - p1.x) + p1.x;
+  const y = delta * (x - p1.x) + p1.y;
 
   return y;
 };
 
-const isAboveAverage = (d: Point, average?: [Point, Point]): boolean => {
-  const _y = getAverageYfromX(d.x, average);
+export const isAboveAverage = (d: Point, average?: [Point, Point]): boolean => {
+  const y = getAverageYfromX(d.x, average);
 
-  return d.y > _y;
+  if (y === null) {
+    return true;
+  }
+
+  return d.y > y;
 };
 
 const setColor = (d: Point, average?: [Point, Point]) => {
@@ -62,9 +66,10 @@ const showLabel = (
 ): void => {
   const x = parseInt(d3.select(event.target).attr('cx')) + 10;
   const y = parseInt(d3.select(event.target).attr('cy')) + 10;
-  const label = d3.select(event.target).attr('data-label');
 
-  console.log('show', { x, y, tooltip });
+  const d = JSON.parse(d3.select(event.target).attr('data-d'));
+  const label = d.label;
+
   tooltip.style('visibility', 'visible').attr('x', x).attr('y', y).text(label);
 };
 
@@ -108,7 +113,7 @@ const Plot = ({ data = [], average, dimensions = defaultDimensions }: PlotType) 
         Math.max(d3.min(data, (d) => d.y) - 50, 0),
         Math.max(
           d3.max(data, (d) => d.y),
-          averageYfromMaxX,
+          averageYfromMaxX || 0,
         ) + 50,
       ])
       .range([height, 0]);
@@ -146,9 +151,9 @@ const Plot = ({ data = [], average, dimensions = defaultDimensions }: PlotType) 
         .append('line')
         .attr('class', 'average')
         .attr('x1', xScale(average[0].x))
-        .attr('y1', yScale(averageYfromMinX))
+        .attr('y1', yScale(averageYfromMinX || 0))
         .attr('x2', xScale(maxX))
-        .attr('y2', yScale(averageYfromMaxX))
+        .attr('y2', yScale(averageYfromMaxX || 0))
         .attr('stroke', 'blue');
     }
 
@@ -164,15 +169,15 @@ const Plot = ({ data = [], average, dimensions = defaultDimensions }: PlotType) 
       .attr('cx', (d) => xScale(d.x))
       .attr('cy', (d) => yScale(d.y))
       .attr('data-label', (d): string => d.label || '')
+      .attr('data-d', (d) => JSON.stringify(d))
       .on('mouseover', (event: any) => {
-        console.log('aaaaa', d3.select(event.target).attr('data-label'));
-
         showLabel(event, tooltip);
       })
       .on('mouseout', () => hideLabel(tooltip));
 
     const tooltip = svg
       .append('text')
+      .attr('id', 'tooltip')
       .attr('class', 'tooltip')
       .style('font-size', 19)
       .attr('fill', 'white')
