@@ -86,6 +86,7 @@ When you open the page ( `yarn dev` ) [http://localhost:3000](http://localhost:3
    * Above average line are bad and red opportunities, because the ratio click / query is high
    * Radio of circle represents how good it is. Higher radios is better opportunity 
    * Hover the circle will show the opportunity label
+   * Mobile devices can click the circle to see the label
 
 * Labels
 
