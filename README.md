@@ -66,7 +66,8 @@ Antonio 04.06.2022
    `yarn dev`
 
  ## test
-   `yarn test`
+   * `yarn test`
+   * `yarn coverage`
 
 # What you will see
 
