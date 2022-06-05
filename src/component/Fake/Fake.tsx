@@ -12,20 +12,20 @@ export const BUTTONS = [
   },
   {
     id: 1,
-    label: '4 Esquinas',
+    label: '4 Corners',
   },
   {
     id: 2,
-    label: '2 muy separados',
+    label: '2 Widely Separated',
   },
   {
     id: 1000,
-    label: 'Erroneo',
+    label: 'Error loading',
   },
 ];
 const Fake = ({ id, onClick }: FakeType) => {
   return (
-    <div>
+    <div className={classes.root}>
       <h3 className={classes.h3}>Fake tester</h3>
       <ul className={classes.ul}>
         {BUTTONS.map((button) => {
