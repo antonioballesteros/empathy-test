@@ -3,8 +3,11 @@ import { PlotValue } from '@/component/Plot';
 import { getOpportunities } from './data';
 import type { Point } from '@/component/Plot';
 
-const Opportunities = () => {
-  const result = getOpportunities();
+interface OpportunitiesType {
+  id: number;
+}
+const Opportunities = ({ id = 0 }: OpportunitiesType) => {
+  const result = getOpportunities(id);
   const opportunities: PlotValue[] = result.data.map(({ query_count, click_count, terms }) => {
     return {
       x: query_count,

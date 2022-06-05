@@ -1,3 +1,4 @@
 import Plot from './Plot';
+import Fake from './Fake';
 
-export { Plot };
+export { Plot, Fake };

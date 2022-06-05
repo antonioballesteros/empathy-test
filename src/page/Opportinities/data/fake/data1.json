@@ -1,0 +1,26 @@
+{
+    "data": [
+      {
+        "terms": "bad",
+        "query_count": 200,
+        "click_count": 190
+      },
+      {
+        "terms": "really bad",
+        "query_count": 50,
+        "click_count": 45
+      },
+      {
+        "terms": "good",
+        "query_count": 50,
+        "click_count": 10
+      },
+      {
+        "terms": "best",
+        "query_count": 250,
+        "click_count": 10
+      }
+    ],
+    "total_query_count": 120351,
+    "total_click_count": 30147
+  }

@@ -1,0 +1,16 @@
+{
+    "data": [
+      {
+        "terms": "bad",
+        "query_count": 1,
+        "click_count": 1
+      },
+      {
+        "terms": "really bad",
+        "query_count": 500,
+        "click_count": 250
+      }
+    ],
+    "total_query_count": 120351,
+    "total_click_count": 30147
+  }
