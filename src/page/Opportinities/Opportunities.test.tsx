@@ -10,7 +10,7 @@ describe('Opportunities', () => {
 
   it('should show error when bad fake values are selected', async () => {
     render(<Opportunities id={1000} />);
-    expect(await screen.findByText(/Some error found/i)).toBeInTheDocument();
+    expect(await screen.findByText('Incorrect set of data 1000')).toBeInTheDocument();
     expect(screen.queryByText(/Show Opportunities/i)).not.toBeInTheDocument();
   });
 });

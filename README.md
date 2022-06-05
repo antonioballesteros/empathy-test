@@ -25,7 +25,7 @@ Antonio 04.06.2022
  * Install d3 
  * Build d3 canvas without information
 
-    * Inside plot component
+    * Insert plot component to page
  * Add information to d3 canvas
  * Check 
  * test view
@@ -36,12 +36,33 @@ Antonio 04.06.2022
   
 
 ## Discarted ideas
-* fake data with loading state, and some delay to simulate real network  
 * Plot component should allow more parameters to configure it, like colors, background, show labels or not, etc
 * Create a real backend to return values
-* Add loading spinner to d3 canvas
+* Insert loading spinner into d3 canvas, not as a component out of d3 
+* Add cypress with visual tests
+
 
 ## Ideas implemented
 * _useGetOpportunities_ Is a faked method. it simulates a delay ( 750ms ) and returns a set of faked values
 * Loading spinner is a component ( the worst you can think )
 * Error shows a component ( the 2nd worst you can think )
+* Create the component responsive.
+   * The Plot component will adapt to the size of parent, being responsive if parent is
+
+## Nice ideas I could implement
+* Add labels to explain the meaning of green / red circles and blue line
+* Detect event resize windows and redraw component
+* Instead to build the d3, use ScatterplotMatrix and be happy
+
+
+# How to install and test it
+
+ ## Install
+   `yarn` 
+
+ ## Run it
+   `yarn dev`
+
+ ## test
+   `yarn test`
+

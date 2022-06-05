@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import * as d3 from 'd3';
 
 import type { PlotValue, Point } from './type';
@@ -9,8 +9,6 @@ interface PlotType {
   data: PlotValue[];
   average?: [Point, Point];
   dimensions?: {
-    width: number;
-    height: number;
     margin: {
       top: number;
       right: number;
@@ -21,8 +19,6 @@ interface PlotType {
 }
 
 const defaultDimensions = {
-  width: 600,
-  height: 300,
   margin: { top: 30, right: 30, bottom: 30, left: 30 },
 };
 
@@ -78,12 +74,21 @@ const hideLabel = (tooltip: d3.Selection<SVGTextElement, unknown, null, undefine
 };
 
 const Plot = ({ data = [], average, dimensions = defaultDimensions }: PlotType) => {
+  const rootRef = useRef(null);
   const svgRef = useRef(null);
 
-  const { width, height, margin } = dimensions;
+  const [rootWidth, setRootWidth] = useState(0);
+  const [rootHeight, setRootHeight] = useState(0);
 
-  const svgWidth = width + margin.left + margin.right;
-  const svgHeight = height + margin.top + margin.bottom;
+  useEffect(() => {
+    setRootWidth(rootRef.current?.clientWidth);
+    setRootHeight(rootRef.current?.clientHeight);
+  }, [rootRef]);
+
+  const { margin } = dimensions;
+
+  const svgWidth = rootWidth - margin.left - margin.right;
+  const svgHeight = rootHeight - margin.top - margin.bottom;
 
   useEffect(() => {
     const minX = average
@@ -105,7 +110,7 @@ const Plot = ({ data = [], average, dimensions = defaultDimensions }: PlotType) 
         Math.min(Math.max(d3.min(data, (d) => d.x) - 50, 0), minX),
         d3.max(data, (d) => d.x) + 50,
       ])
-      .range([0, width]);
+      .range([0, svgWidth]);
 
     const yScale = d3
       .scaleLinear()
@@ -116,7 +121,7 @@ const Plot = ({ data = [], average, dimensions = defaultDimensions }: PlotType) 
           averageYfromMaxX || 0,
         ) + 50,
       ])
-      .range([height, 0]);
+      .range([svgHeight, 0]);
 
     // Create root container where we will append all other chart elements
     const svgEl = d3.select(svgRef.current);
@@ -124,8 +129,8 @@ const Plot = ({ data = [], average, dimensions = defaultDimensions }: PlotType) 
     const svg = svgEl.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
 
     // Add X grid lines with labels
-    const xAxis = d3.axisBottom(xScale).ticks(5).tickSize(-height);
-    const xAxisGroup = svg.append('g').attr('transform', `translate(0, ${height})`).call(xAxis);
+    const xAxis = d3.axisBottom(xScale).ticks(5).tickSize(-svgHeight);
+    const xAxisGroup = svg.append('g').attr('transform', `translate(0, ${svgHeight})`).call(xAxis);
     xAxisGroup.select('.domain').remove();
     xAxisGroup.selectAll('line').attr('stroke', 'rgba(255, 255, 255, 0.2)');
     xAxisGroup
@@ -135,7 +140,7 @@ const Plot = ({ data = [], average, dimensions = defaultDimensions }: PlotType) 
       .attr('font-size', '0.75rem');
 
     // Add Y grid lines with labels
-    const yAxis = d3.axisLeft(yScale).ticks(5).tickSize(-width);
+    const yAxis = d3.axisLeft(yScale).ticks(5).tickSize(-svgWidth);
     const yAxisGroup = svg.append('g').call(yAxis);
     yAxisGroup.select('.domain').remove();
     yAxisGroup.selectAll('line').attr('stroke', 'rgba(255, 255, 255, 0.2)');
@@ -183,9 +188,19 @@ const Plot = ({ data = [], average, dimensions = defaultDimensions }: PlotType) 
       .style('font-size', 19)
       .attr('fill', 'white')
       .style('visibility', 'hidden');
-  }, [data, width, height, margin, average]); // Redraw chart if data changes
+  }, [data, svgWidth, svgHeight, margin, average]); // Redraw chart if data changes
 
-  return <svg className={classes.svg} ref={svgRef} width={svgWidth} height={svgHeight} />;
+  return (
+    <div
+      ref={rootRef}
+      style={{
+        width: '100%',
+        height: '100%',
+      }}
+    >
+      <svg className={classes.svg} ref={svgRef} width={rootWidth} height={rootHeight} />
+    </div>
+  );
 };
 
 export default Plot;
