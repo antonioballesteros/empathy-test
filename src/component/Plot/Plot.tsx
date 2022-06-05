@@ -196,6 +196,7 @@ const addCircles = (
   average: [Point, Point] | undefined,
   xScale: d3.ScaleLinear<number, number, never>,
   yScale: d3.ScaleLinear<number, number, never>,
+  radiusScale: d3.ScaleLinear<number, number, never>,
 ) => {
   // Add circles with values from data
   svg
@@ -205,7 +206,7 @@ const addCircles = (
     .append('circle')
     .attr('class', 'circle')
     .attr('fill', (d: PlotValue) => setColor(d, literals, average))
-    .attr('r', 5)
+    .attr('r', (d: PlotValue) => radiusScale(d.x / d.y))
     .attr('cx', (d: PlotValue) => xScale(d.x))
     .attr('cy', (d: PlotValue) => yScale(d.y))
     .attr('data-label', (d: PlotValue): string => d.label || '')
@@ -265,6 +266,11 @@ const Plot = ({ data = [], average, literals = defaultLiteral }: PlotType) => {
       ])
       .range([svgHeight + MARGIN.labelsHeight, MARGIN.labelsHeight]);
 
+    const radiusScale = d3
+      .scaleLinear()
+      .domain([d3.min(data, (d: any) => d.x / d.y), d3.max(data, (d: any) => d.x / d.y)])
+      .range([3, 10]);
+
     // Create root container where we will append all other chart elements
     const svgEl = d3.select(svgRef.current);
     svgEl.selectAll('*').remove(); // Clear svg content before adding new elements
@@ -273,7 +279,7 @@ const Plot = ({ data = [], average, literals = defaultLiteral }: PlotType) => {
     addGridLines(svg, xScale, yScale, svgWidth, svgHeight);
     addInfoLabels(svg, literals, average, svgWidth);
     addAverage(svg, average, xScale, yScale, minX, maxX);
-    addCircles(svg, data, literals, average, xScale, yScale);
+    addCircles(svg, data, literals, average, xScale, yScale, radiusScale);
   }, [data, svgWidth, svgHeight, literals, average]); // Redraw chart if data changes
 
   return (
