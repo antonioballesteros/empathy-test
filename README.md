@@ -47,10 +47,12 @@ Antonio 04.06.2022
 * Loading spinner is a component ( the worst you can think )
 * Error shows a component ( the 2nd worst you can think )
 * Create the component responsive.
+
    * The Plot component will adapt to the size of parent, being responsive if parent is
+* Added labels to explain the meaning of green / red circles and blue line
+* Radius from Cirles show the best opportunities. Bigger are better 
 
 ## Nice ideas I could implement
-* Add labels to explain the meaning of green / red circles and blue line
 * Detect event resize windows and redraw component
 * Instead to build the d3, use ScatterplotMatrix and be happy
 
