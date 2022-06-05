@@ -68,3 +68,34 @@ Antonio 04.06.2022
  ## test
    `yarn test`
 
+# What you will see
+
+When you open the page ( `yarn dev` ) [http://localhost:3000](http://localhost:3000/) you will see a short loading spinner a d3 chart with some circles around a blue line when the information arrives.
+
+* Axis
+
+   * X axis represents the amount of queries
+   * Y axis represents the amount of clicks
+* Average
+
+   * Blue inclined line represent the average ratio  `total_click_count` / `total_query_count`
+
+* Circles
+
+   * Under average line are good opportunities, represented with a green color, because the ratio click / query is low
+   * Above average line are bad and red opportunities, because the ratio click / query is high
+   * Radio of circle represents how good it is. Higher radios is better opportunity 
+   * Hover the circle will show the opportunity label
+
+* Labels
+
+   * The component is ready to show only two types of results ( good / bad ).
+   
+* Fake
+
+   * To help a bit with test and visualization, I created some set of results to simulate opportunities results
+   * `Normal`, `4 Corners` and `2 Widely Separated` are valid results
+   * `Error loading` simulate a problem with reception and shows an error text
+
+
+
