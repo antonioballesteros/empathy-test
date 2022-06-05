@@ -9,3 +9,8 @@ export interface PlotValue {
   y: number;
   label?: string;
 }
+
+export interface Literal {
+  color: string;
+  label: string;
+}

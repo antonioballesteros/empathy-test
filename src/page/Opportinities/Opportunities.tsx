@@ -1,7 +1,7 @@
 import { Plot, Loading, Error } from '@/component';
 import { PlotValue } from '@/component/Plot';
 import { useGetOpportunities } from './data';
-import type { Point } from '@/component/Plot';
+import type { Point, Literal } from '@/component/Plot';
 import classes from './Opportunities.module.css';
 
 interface OpportunitiesType {
@@ -35,11 +35,26 @@ const Opportunities = ({ id = 0 }: OpportunitiesType) => {
     },
   ];
 
+  const literals: [Literal, Literal] = [
+    {
+      color: 'red',
+      label: 'Bad Opportunities',
+    },
+    {
+      color: 'green',
+      label: 'Good Opportunities',
+    },
+  ];
+
   return (
     <div className={classes.root}>
       <h2 className={classes.h2}>Show Opportunities</h2>
       <div className={classes.body}>
-        {loading ? <Loading /> : <Plot data={opportunities} average={average} />}
+        {loading ? (
+          <Loading />
+        ) : (
+          <Plot data={opportunities} average={average} literals={literals} />
+        )}
       </div>
     </div>
   );
