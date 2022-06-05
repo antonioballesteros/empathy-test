@@ -1,3 +1,3 @@
-import getOpportunities from './getOpportunities';
+import useGetOpportunities from './useGetOpportunities';
 
-export { getOpportunities };
+export { useGetOpportunities };

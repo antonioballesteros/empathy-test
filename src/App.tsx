@@ -7,6 +7,7 @@ function App() {
   const [id, setId] = useState(0);
   return (
     <div className={classes.App}>
+      <h1 className={classes.h1}>Empathy</h1>
       <Opportunities id={id} />
       <Fake id={id} onClick={(id) => setId(id)} />
     </div>

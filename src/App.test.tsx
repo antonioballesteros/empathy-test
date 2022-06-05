@@ -3,8 +3,8 @@ import App from './App';
 import { render, screen } from '@/utils/test-utils';
 
 describe('Simple working test', () => {
-  it('the title is visible', () => {
+  it('the App title is visible', () => {
     render(<App />);
-    expect(screen.getByText(/Show Opportunities/i)).toBeInTheDocument();
+    expect(screen.queryByText(/Empathy/i)).toBeInTheDocument();
   });
 });

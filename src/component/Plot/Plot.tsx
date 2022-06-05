@@ -149,6 +149,7 @@ const Plot = ({ data = [], average, dimensions = defaultDimensions }: PlotType) 
     if (average) {
       svg
         .append('line')
+        .attr('id', 'average')
         .attr('class', 'average')
         .attr('x1', xScale(average[0].x))
         .attr('y1', yScale(averageYfromMinX || 0))

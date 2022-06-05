@@ -1,3 +1,10 @@
 .App {
   text-align: center;
 }
+
+.h1 {
+  font-family: "eMontserrat, Montserrat, sans-serif";
+  font-size: 50px;
+  text-transform: uppercase;
+  margin: 10px 0;
+}

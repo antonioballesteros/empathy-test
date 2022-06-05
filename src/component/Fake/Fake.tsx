@@ -5,21 +5,38 @@ interface FakeType {
   onClick: (id: number) => void;
 }
 
-const BUTTONS = 3;
+export const BUTTONS = [
+  {
+    id: 0,
+    label: 'Normal',
+  },
+  {
+    id: 1,
+    label: '4 Esquinas',
+  },
+  {
+    id: 2,
+    label: '2 muy separados',
+  },
+  {
+    id: 1000,
+    label: 'Erroneo',
+  },
+];
 const Fake = ({ id, onClick }: FakeType) => {
   return (
     <div>
       <h3 className={classes.h3}>Fake tester</h3>
       <ul className={classes.ul}>
-        {[...Array(BUTTONS).keys()].map((item) => {
+        {BUTTONS.map((button) => {
           return (
-            <li className={classes.li} key={item}>
+            <li className={classes.li} key={button.id}>
               <button
                 className={classes.button}
-                onClick={() => onClick(item)}
-                disabled={id === item}
+                onClick={() => onClick(button.id)}
+                disabled={id === button.id}
               >
-                Test {item}
+                {button.label}
               </button>
             </li>
           );

@@ -7,8 +7,8 @@
       },
       {
         "terms": "really bad",
-        "query_count": 500,
-        "click_count": 250
+        "query_count": 11500,
+        "click_count": 1250
       }
     ],
     "total_query_count": 120351,

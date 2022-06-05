@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import Plot, { getAverageYfromX, isAboveAverage } from './Plot';
-import { render, screen, userEvent } from '@/utils/test-utils';
+import { render, userEvent } from '@/utils/test-utils';
+
+import type { PlotValue, Point } from './type';
 
 describe('Plot', () => {
   describe('Plot', () => {
@@ -41,6 +43,24 @@ describe('Plot', () => {
 
       userEvent.unhover(circle);
       expect(tooltip).not.toBeVisible();
+    });
+
+    it('should show average line', () => {
+      const data: PlotValue[] = [
+        { x: 200, y: 190, label: 'bad' },
+        { x: 50, y: 45, label: 'really bad' },
+        { x: 50, y: 10, label: 'good' },
+        { x: 250, y: 10, label: 'best' },
+      ];
+
+      const average: [Point, Point] = [
+        { x: 0, y: 0 },
+        { x: 1000, y: 100 },
+      ];
+
+      const { container } = render(<Plot data={data} average={average} />);
+      const line = container.querySelector('#average');
+      expect(line).toBeVisible();
     });
   });
 
